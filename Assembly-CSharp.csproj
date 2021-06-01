@@ -635,7 +635,20 @@
       <HintPath>H:/Portfolio/Cube Game/Cube-Game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="PlayFab.csproj">
+      <Project>{ED69E01D-0FCD-F2C9-2853-81B698490E95}</Project>
+      <Name>PlayFab</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabEditorExtensions.csproj">
+      <Project>{CCC02525-1BAC-1E88-CD63-32ECBB3F6356}</Project>
+      <Name>PlayFabEditorExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabSDKEditor.csproj">
+      <Project>{67AF6DE4-7972-E1E9-23B4-CD2C38A49E6A}</Project>
+      <Name>PlayFabSDKEditor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

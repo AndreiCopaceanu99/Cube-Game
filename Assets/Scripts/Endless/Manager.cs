@@ -17,6 +17,12 @@ public class Manager : MonoBehaviour
 
     [SerializeField] GameObject Lose_Panel;
 
+    [SerializeField] GameObject Ad_Panel;
+    [SerializeField] Text Timer;
+    float Ad_Timer;
+    [SerializeField] Button Ad_Buton;
+    bool Second_Chance;
+
     [SerializeField] Text Points;
 
     // Start is called before the first frame update
@@ -24,6 +30,10 @@ public class Manager : MonoBehaviour
     {
         Time.timeScale = 1;
         Lose_Panel.SetActive(false);
+        Ad_Panel.SetActive(false);
+
+        Ad_Timer = 3;
+        Second_Chance = false;
 
         camera = Camera.main;
 
@@ -40,7 +50,11 @@ public class Manager : MonoBehaviour
 
         Update_Cubes();
 
-        Lose();
+        Update_Camera();
+        if(Ad_Panel.active)
+        {
+            Ad();
+        }
     }
 
     void Update_Cubes()
@@ -60,15 +74,41 @@ public class Manager : MonoBehaviour
         }
     }
 
-    void Lose()
+    void Update_Camera()
     {
         Ball_Y = Ball.transform.position.y;
         Camera_Y = camera.transform.position.y;
 
         if(Camera_Y - Ball_Y >= 6f)
         {
-            Lose_Panel.SetActive(true);
-            Time.timeScale = 0;
+            Lose();
+        }
+    }
+
+    void Lose()
+    {
+        Lose_Panel.SetActive(true);
+        Time.timeScale = 0;
+        if(Second_Chance)
+        {
+            Ad_Buton.interactable = false;
+        }
+    }
+
+    void Ad()
+    {
+        Ball.transform.position = new Vector2(0, Ball_Y);
+        Time.timeScale = 1;
+        Ad_Timer -= Time.deltaTime;
+        Timer.text = Mathf.FloorToInt(Ad_Timer).ToString();
+        Debug.Log(Ad_Timer);
+        if(Ad_Timer <= 0)
+        {
+            Ad_Panel.SetActive(false);
+            Lose_Panel.SetActive(false);
+
+            Ball.transform.position = new Vector2(0, camera.transform.position.y + 2);
+            //Time.timeScale = 1;
         }
     }
 
@@ -77,8 +117,14 @@ public class Manager : MonoBehaviour
         Points.text = "Points: " + -Mathf.Round(Ball_Y * 100f) / 100f;
     }
 
-    public void Retry_Button()
+    public void Main_Menu_Button()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Main_Menu");
+    }
+
+    public void Continue()
+    {
+        Second_Chance = true;
+        Ad_Panel.SetActive(true);
     }
 }
