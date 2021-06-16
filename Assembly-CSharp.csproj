@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Main_Menu\Main_Menu.cs" />
     <Compile Include="Assets\Scripts\Main_Menu\Shop.cs" />
     <Compile Include="Assets\Scripts\Main_Menu\Volume.cs" />
+    <Compile Include="Assets\Scripts\Playfab\PlayFab_Controller.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

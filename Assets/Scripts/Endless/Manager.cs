@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Is responsable with managing the game
 public class Manager : MonoBehaviour
 {
     Camera camera;
@@ -37,6 +38,7 @@ public class Manager : MonoBehaviour
 
         camera = Camera.main;
 
+        // Positions all the platforms at equal distances by taking as reference the one abowe each other
         for (int i = 1; i <= Cubes.Length - 1; i++)
         {
             Cubes[i].transform.position = new Vector3(0, Cubes[i - 1].transform.position.y - 2f, 0);
@@ -57,6 +59,7 @@ public class Manager : MonoBehaviour
         }
     }
 
+    // Checks if the platforms are in front of the camera, if not, they are moved at the end of the array and beneath the lowest platform in the scene. This way the performances are improved
     void Update_Cubes()
     {
         Cube_Y = Cubes[0].transform.position.y;
@@ -74,27 +77,32 @@ public class Manager : MonoBehaviour
         }
     }
 
+    // The camera is updated bassed on the ball's position
     void Update_Camera()
     {
         Ball_Y = Ball.transform.position.y;
         Camera_Y = camera.transform.position.y;
-
+        // If the ball goes off screen, the game is over
         if(Camera_Y - Ball_Y >= 6f)
         {
             Lose();
         }
     }
 
+    // The game is stopped and the game over screen pups up
     void Lose()
     {
         Lose_Panel.SetActive(true);
         Time.timeScale = 0;
+        // Checks if the player is on the second chance
         if(Second_Chance)
         {
+            // Deactivates the ad button
             Ad_Buton.interactable = false;
         }
     }
 
+    // Resets the ball, by giving one more chance to the player and plays an ad
     void Ad()
     {
         Ball.transform.position = new Vector2(0, Ball_Y);
@@ -108,20 +116,22 @@ public class Manager : MonoBehaviour
             Lose_Panel.SetActive(false);
 
             Ball.transform.position = new Vector2(0, camera.transform.position.y + 2);
-            //Time.timeScale = 1;
         }
     }
 
+    // Displayes the points that the player got
     void Points_UI()
     {
         Points.text = "Points: " + -Mathf.Round(Ball_Y * 100f) / 100f;
     }
 
+    // Loads the main menu scene
     public void Main_Menu_Button()
     {
         SceneManager.LoadScene("Main_Menu");
     }
 
+    // Activates the ad
     public void Continue()
     {
         Second_Chance = true;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// IS responsable with putting the canvas on the camera
 public class Initialise_Canvas_Camera : MonoBehaviour
 {
     [SerializeField] GameObject Camera;
