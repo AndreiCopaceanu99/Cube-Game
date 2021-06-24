@@ -86,19 +86,43 @@ public class Manager : MonoBehaviour
         if(Camera_Y - Ball_Y >= 6f)
         {
             Lose();
+            PlayFab_Controller.PFC.Leaderboard_Displayed = true;
+        }
+        else
+        {
+            PlayFab_Controller.PFC.Leaderboard_Displayed = false;
         }
     }
 
     // The game is stopped and the game over screen pups up
     void Lose()
     {
-        Lose_Panel.SetActive(true);
-        Time.timeScale = 0;
-        // Checks if the player is on the second chance
-        if(Second_Chance)
+        bool High_Score_Ready = false;
+        if (-(int)Ball_Y > PlayFab_Controller.PFC.Player_High_Score)
         {
-            // Deactivates the ad button
-            Ad_Buton.interactable = false;
+            PlayFab_Controller.PFC.Player_High_Score = (int)-Ball_Y;
+            PlayFab_Controller.PFC.Start_Cloud_Update_Palyer_Stats();
+            High_Score_Ready = true;
+        }
+        else
+        {
+            High_Score_Ready = true;
+        }
+        if (High_Score_Ready)
+        {
+            Lose_Panel.SetActive(true);
+            if (!PlayFab_Controller.PFC.Leaderboard_Displayed)
+            {
+                PlayFab_Controller.PFC.Get_Leaderboard();
+            }
+            Lose_Panel.SetActive(true);
+            Time.timeScale = 0;
+            // Checks if the player is on the second chance
+            if (Second_Chance)
+            {
+                // Deactivates the ad button
+                Ad_Buton.interactable = false;
+            }
         }
     }
 
@@ -122,12 +146,14 @@ public class Manager : MonoBehaviour
     // Displayes the points that the player got
     void Points_UI()
     {
-        Points.text = "Points: " + -Mathf.Round(Ball_Y * 100f) / 100f;
+        Points.text = "Points: " + (int) -Ball_Y;
     }
 
     // Loads the main menu scene
     public void Main_Menu_Button()
     {
+        //PlayFab_Controller.PFC.Leaderboard_Displayed = false;
+        PlayFab_Controller.PFC.Close_Leaderboard_Panel();
         SceneManager.LoadScene("Main_Menu");
     }
 

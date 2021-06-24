@@ -15,6 +15,7 @@ public class Main_Menu : MonoBehaviour
         {
             Menu_Objects[i].SetActive(false);
         }
+        PlayFab_Controller.PFC.Leaderboard_Displayed = false;
     }
 
     // Load the endless scene
@@ -41,10 +42,12 @@ public class Main_Menu : MonoBehaviour
     }
 
     // Opens the shop panel
-    public void Shop()
+    public void Open_Shop()
     {
+        Shop.SH.Update_Skins();
         Menu_Objects[0].SetActive(false);
         Menu_Objects[2].SetActive(true);
+        Shop.SH.Update_Panels();
     }
 
     // Opens the credits panel
