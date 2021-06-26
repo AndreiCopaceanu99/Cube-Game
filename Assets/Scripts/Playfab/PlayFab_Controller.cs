@@ -222,7 +222,7 @@ public class PlayFab_Controller : MonoBehaviour
                 GameObject Temp_Listing = Instantiate(Listing_Prefab, Listing_Container);
                 Leaderboard_Listing LL = Temp_Listing.GetComponent<Leaderboard_Listing>();
                 LL.Player_Name_Text.text = Player.DisplayName;
-                if(Player.DisplayName == Username && Player.StatValue < Player_High_Score)
+                if(Player.PlayFabId == My_ID && Player.StatValue < Player_High_Score)
                 {
                     Player.StatValue = Player_High_Score;
                 }
@@ -235,6 +235,7 @@ public class PlayFab_Controller : MonoBehaviour
 
     public void Close_Leaderboard_Panel()
     {
+        Debug.Log("NO");
         for(int i = Listing_Container.childCount - 1; i >= 0 ; i--)
         {
             Destroy(Listing_Container.GetChild(i).gameObject);

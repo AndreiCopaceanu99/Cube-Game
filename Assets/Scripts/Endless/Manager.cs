@@ -113,6 +113,7 @@ public class Manager : MonoBehaviour
             Lose_Panel.SetActive(true);
             if (!PlayFab_Controller.PFC.Leaderboard_Displayed)
             {
+
                 PlayFab_Controller.PFC.Get_Leaderboard();
             }
             Lose_Panel.SetActive(true);
@@ -129,17 +130,17 @@ public class Manager : MonoBehaviour
     // Resets the ball, by giving one more chance to the player and plays an ad
     void Ad()
     {
-        Ball.transform.position = new Vector2(0, Ball_Y);
+        Ball.transform.position = new Vector2(0, camera.transform.position.y + 2);
         Time.timeScale = 1;
         Ad_Timer -= Time.deltaTime;
         Timer.text = Mathf.FloorToInt(Ad_Timer).ToString();
-        Debug.Log(Ad_Timer);
+        //Debug.Log(Ad_Timer);
         if(Ad_Timer <= 0)
         {
             Ad_Panel.SetActive(false);
             Lose_Panel.SetActive(false);
-
-            Ball.transform.position = new Vector2(0, camera.transform.position.y + 2);
+            PlayFab_Controller.PFC.Close_Leaderboard_Panel();
+            //Ball.transform.position = new Vector2(0, camera.transform.position.y + 2);
         }
     }
 
@@ -152,7 +153,8 @@ public class Manager : MonoBehaviour
     // Loads the main menu scene
     public void Main_Menu_Button()
     {
-        //PlayFab_Controller.PFC.Leaderboard_Displayed = false;
+        PlayFab_Controller.PFC.Player_Coins += (int)-Ball_Y;
+        PlayFab_Controller.PFC.Start_Cloud_Update_Palyer_Stats();
         PlayFab_Controller.PFC.Close_Leaderboard_Panel();
         SceneManager.LoadScene("Main_Menu");
     }

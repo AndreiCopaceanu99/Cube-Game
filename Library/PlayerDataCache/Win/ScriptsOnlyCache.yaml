@@ -9,6 +9,8 @@ ScriptsOnlyBuild:
     - Leaderboard_Listing
     - Main_Menu
     - Manager
+    - Materials
+    - Persistent_Data
     - PlayFab_Controller
     - Shop
     - Volume
@@ -83,9 +85,9 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11220}
+      Script: {instanceID: 11190}
     - Class: 114
-      Script: {instanceID: 11426}
+      Script: {instanceID: 11222}
     - Class: 114
       Script: {instanceID: 11478}
     - Class: 114
@@ -99,17 +101,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 12346}
+      Script: {instanceID: 12348}
     - Class: 114
-      Script: {instanceID: 12426}
+      Script: {instanceID: 12430}
     - Class: 114
-      Script: {instanceID: 12536}
+      Script: {instanceID: 12540}
     - Class: 114
-      Script: {instanceID: 12996}
+      Script: {instanceID: 12846}
     - Class: 114
-      Script: {instanceID: 13208}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13440}
+      Script: {instanceID: 13214}
+    - Class: 114
+      Script: {instanceID: 13446}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -148,9 +152,9 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11220}
+      Script: {instanceID: 11190}
     - Class: 114
-      Script: {instanceID: 11426}
+      Script: {instanceID: 11222}
     - Class: 114
       Script: {instanceID: 11478}
     - Class: 114
@@ -158,17 +162,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11952}
     - Class: 114
-      Script: {instanceID: 12336}
+      Script: {instanceID: 12204}
     - Class: 114
-      Script: {instanceID: 12426}
+      Script: {instanceID: 12338}
     - Class: 114
-      Script: {instanceID: 12652}
+      Script: {instanceID: 12372}
     - Class: 114
-      Script: {instanceID: 12996}
+      Script: {instanceID: 12430}
     - Class: 114
-      Script: {instanceID: 13440}
+      Script: {instanceID: 12656}
     - Class: 114
-      Script: {instanceID: 55902}
+      Script: {instanceID: 13002}
+    - Class: 114
+      Script: {instanceID: 13446}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -211,13 +217,13 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11192}
+      Script: {instanceID: 11190}
     - Class: 114
-      Script: {instanceID: 11220}
+      Script: {instanceID: 11194}
     - Class: 114
-      Script: {instanceID: 11240}
+      Script: {instanceID: 11222}
     - Class: 114
-      Script: {instanceID: 11426}
+      Script: {instanceID: 11242}
     - Class: 114
       Script: {instanceID: 11478}
     - Class: 114
@@ -227,25 +233,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11952}
     - Class: 114
-      Script: {instanceID: 12282}
+      Script: {instanceID: 12284}
     - Class: 114
-      Script: {instanceID: 12426}
+      Script: {instanceID: 12430}
     - Class: 114
-      Script: {instanceID: 12436}
+      Script: {instanceID: 12440}
     - Class: 114
-      Script: {instanceID: 12626}
+      Script: {instanceID: 12630}
     - Class: 114
-      Script: {instanceID: 12996}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13302}
+      Script: {instanceID: 13308}
     - Class: 114
-      Script: {instanceID: 13402}
+      Script: {instanceID: 13408}
     - Class: 114
-      Script: {instanceID: 13440}
+      Script: {instanceID: 13446}
     - Class: 114
-      Script: {instanceID: 13480}
+      Script: {instanceID: 13486}
     - Class: 114
-      Script: {instanceID: 13512}
+      Script: {instanceID: 13518}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -269,6 +275,12 @@ ScriptsOnlyBuild:
     - Class: 245
       Script: {instanceID: 0}
   scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: aeb62f729c52c814dec86c47dcac1471
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Text
   - hash:
       serializedVersion: 2
       Hash: a1f19ad47d3094e235f21b74dfc423a8
@@ -349,12 +361,6 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: aeb62f729c52c814dec86c47dcac1471
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Text
-  - hash:
-      serializedVersion: 2
       Hash: 499fd23433e68e265d153aa6b95d0047
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -403,7 +409,7 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 350d7ba51b2cb52333157d9ba35de035
+      Hash: 19d687cac1b86eae914bcf7cab44fa03
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayFab_Controller
@@ -457,7 +463,7 @@ ScriptsOnlyBuild:
     className: Vignette
   - hash:
       serializedVersion: 2
-      Hash: 042012bdf4fd9d7a513fb4e947f161f0
+      Hash: 4b1bf1dc365f5f487441fc443663504b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Shop
@@ -559,6 +565,12 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
+      Hash: 48a0a8c69592cd1840d55a6c36116260
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Leaderboard_Listing
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -599,6 +611,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Cubes_Movement
+  - hash:
+      serializedVersion: 2
+      Hash: 098bce51c3aa5169f00a518eace06edc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Persistent_Data
   - hash:
       serializedVersion: 2
       Hash: 50c443b12ccc0b475183318b5088bcc5
@@ -689,6 +707,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 3f9ae9beee2bd1ebc83259c4699a983d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Materials
   - hash:
       serializedVersion: 2
       Hash: 6939772cb3ce775a8e8d99f332534491
@@ -857,12 +881,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 48a0a8c69592cd1840d55a6c36116260
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Leaderboard_Listing
   platform: 5
   scenePathNames:
   - Assets/Scenes/Login.unity

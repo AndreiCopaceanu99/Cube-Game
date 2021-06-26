@@ -18,6 +18,8 @@ public class Shop : MonoBehaviour
     int Active_Panel;
     int Objects_Order;
 
+    [SerializeField] Text Coins;
+
     private void OnEnable()
     {
         SH = this;
@@ -26,10 +28,18 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Update_Skins();
+        //PlayFab_Controller.PFC.GetStats();
         Active_Panel = 0;
         Objects_Order = 0;
         Update_Panels();
+    }
+
+    private void Update()
+    {
+        if(Coins.text != PlayFab_Controller.PFC.Player_Coins.ToString())
+        {
+            Coins.text = "Money: " + PlayFab_Controller.PFC.Player_Coins.ToString();
+        }
     }
 
     // Updates the panel with the proper images, names, price tags and ownership
@@ -66,54 +76,59 @@ public class Shop : MonoBehaviour
 
     public void Unlock_Skin(int Index)
     {
-        if(Ownership[Index].text == "Not owned")
+        if (PlayFab_Controller.PFC.Player_Coins >= Panels[Active_Panel].Object[Objects_Order + Index].Price)
         {
-            Panels[Active_Panel].Object[Objects_Order + Index].Ownership = 1;
-            Panels[Active_Panel].Object[Objects_Order + Index].Price = 0;
-        }
-        if(Ownership[Index].text == "Owned")
-        {
-            for(int i = 0; i < Panels[Active_Panel].Object.Length; i++)
+            if (Ownership[Index].text == "Not owned")
             {
-                if (Panels[Active_Panel].Object[i].Ownership == 2)
+                PlayFab_Controller.PFC.Player_Coins -= Panels[Active_Panel].Object[Objects_Order + Index].Price;
+                PlayFab_Controller.PFC.Start_Cloud_Update_Palyer_Stats();
+                Panels[Active_Panel].Object[Objects_Order + Index].Ownership = 1;
+                Panels[Active_Panel].Object[Objects_Order + Index].Price = 0;
+            }
+            if (Ownership[Index].text == "Owned")
+            {
+                for (int i = 0; i < Panels[Active_Panel].Object.Length; i++)
                 {
-                    Panels[Active_Panel].Object[i].Ownership = 1;
+                    if (Panels[Active_Panel].Object[i].Ownership == 2)
+                    {
+                        Panels[Active_Panel].Object[i].Ownership = 1;
+                    }
                 }
+
+                Panels[Active_Panel].Object[Objects_Order + Index].Ownership = 2;
             }
 
-            Panels[Active_Panel].Object[Objects_Order + Index].Ownership = 2;
+            switch (Active_Panel)
+            {
+                case 0:
+                    Persistent_Data.PD.Balls[Objects_Order + Index] = true;
+                    PlayFab_Controller.PFC.Ball_Data = Persistent_Data.PD.Skins_Data_To_String(Active_Panel);
+                    if (Panels[Active_Panel].Object[Objects_Order + Index].Ownership == 2)
+                    {
+                        Persistent_Data.PD.My_Ball = Objects_Order + Index;
+                    }
+                    break;
+                case 1:
+                    Persistent_Data.PD.Platforms[Objects_Order + Index] = true;
+                    PlayFab_Controller.PFC.Platform_Data = Persistent_Data.PD.Skins_Data_To_String(Active_Panel);
+                    if (Panels[Active_Panel].Object[Objects_Order + Index].Ownership == 2)
+                    {
+                        Persistent_Data.PD.My_Platform = Objects_Order + Index;
+                    }
+                    break;
+                case 2:
+                    Persistent_Data.PD.Backgrounds[Objects_Order + Index] = true;
+                    PlayFab_Controller.PFC.Background_Data = Persistent_Data.PD.Skins_Data_To_String(Active_Panel);
+                    if (Panels[Active_Panel].Object[Objects_Order + Index].Ownership == 2)
+                    {
+                        Persistent_Data.PD.My_Background = Objects_Order + Index;
+                    }
+                    break;
+            }
+            PlayFab_Controller.PFC.Skin_Selection = Persistent_Data.PD.My_Ball.ToString() + Persistent_Data.PD.My_Platform.ToString() + Persistent_Data.PD.My_Background.ToString(); ;
+            PlayFab_Controller.PFC.Set_User_Data();
+            Update_Panels();
         }
-
-        switch(Active_Panel)
-        {
-            case 0:
-                Persistent_Data.PD.Balls[Objects_Order + Index] = true;
-                PlayFab_Controller.PFC.Ball_Data = Persistent_Data.PD.Skins_Data_To_String(Active_Panel);
-                if (Panels[Active_Panel].Object[Objects_Order + Index].Ownership == 2)
-                {
-                    Persistent_Data.PD.My_Ball = Objects_Order + Index;
-                }
-                break;
-            case 1:
-                Persistent_Data.PD.Platforms[Objects_Order + Index] = true;
-                PlayFab_Controller.PFC.Platform_Data = Persistent_Data.PD.Skins_Data_To_String(Active_Panel);
-                if (Panels[Active_Panel].Object[Objects_Order + Index].Ownership == 2)
-                {
-                    Persistent_Data.PD.My_Platform = Objects_Order + Index;
-                }
-                break;
-            case 2:
-                Persistent_Data.PD.Backgrounds[Objects_Order + Index] = true;
-                PlayFab_Controller.PFC.Background_Data = Persistent_Data.PD.Skins_Data_To_String(Active_Panel);
-                if (Panels[Active_Panel].Object[Objects_Order + Index].Ownership == 2)
-                {
-                    Persistent_Data.PD.My_Background = Objects_Order + Index;
-                }
-                break;
-        }
-        PlayFab_Controller.PFC.Skin_Selection = Persistent_Data.PD.My_Ball.ToString() + Persistent_Data.PD.My_Platform.ToString() + Persistent_Data.PD.My_Background.ToString(); ;
-        PlayFab_Controller.PFC.Set_User_Data();
-        Update_Panels();
     }
 
     public void Update_Skins()
