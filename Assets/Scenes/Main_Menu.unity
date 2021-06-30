@@ -4745,6 +4745,10 @@ MonoBehaviour:
       Object: {fileID: 21300000, guid: 72b5e168b252f7f449e0a04da56f6505, type: 3}
       Price: 0
       Ownership: 2
+    - Name: Black
+      Object: {fileID: 21300000, guid: 09ff97b2e98acdf41843798743a5b479, type: 3}
+      Price: 50
+      Ownership: 0
     - Name: Autumn
       Object: {fileID: 21300000, guid: 156063074e6592e408c910f6e5ead1a9, type: 3}
       Price: 500

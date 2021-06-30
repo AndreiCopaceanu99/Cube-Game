@@ -173,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1e0d12352a84c142b79a76ce65f2ec8, type: 2}
+  - {fileID: 2100000, guid: c66dcfaa1bd261c418d1264e0bf05b0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2676,6 +2676,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 6a4637d3401039a4dac01b0b5269ac9b, type: 2}
   Background_Images:
   - {fileID: 21300000, guid: 72b5e168b252f7f449e0a04da56f6505, type: 3}
+  - {fileID: 21300000, guid: 09ff97b2e98acdf41843798743a5b479, type: 3}
   - {fileID: 21300000, guid: 156063074e6592e408c910f6e5ead1a9, type: 3}
   - {fileID: 21300000, guid: 9ff5a713dcaff5946a3e37040d102e1d, type: 3}
 --- !u!1 &1498342197

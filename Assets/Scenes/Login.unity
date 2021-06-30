@@ -596,7 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Balls: 0100000000
   Platforms: 0100000000
-  Backgrounds: 010000
+  Backgrounds: 01000000
   My_Ball: 0
   My_Platform: 0
   My_Background: 0
