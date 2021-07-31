@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // It is responsable with the main menu manager
 public class Main_Menu : MonoBehaviour
 {
     [SerializeField] GameObject[] Menu_Objects;
+    [SerializeField] Text Username;
 
     private void Start()
     {
@@ -16,6 +18,16 @@ public class Main_Menu : MonoBehaviour
             Menu_Objects[i].SetActive(false);
         }
         PlayFab_Controller.PFC.Leaderboard_Displayed = false;
+
+        Username.text = PlayFab_Controller.PFC.Username;
+    }
+
+    private void Update()
+    {
+        if (Username.text == "")
+        {
+            Username.text = PlayFab_Controller.PFC.Username;
+        }
     }
 
     // Load the endless scene
@@ -55,5 +67,11 @@ public class Main_Menu : MonoBehaviour
     {
         Menu_Objects[0].SetActive(false);
         Menu_Objects[3].SetActive(true);
+    }
+
+    public void Sign_Out()
+    {
+        PlayFab_Controller.PFC.Clear_Login_Data();
+        SceneManager.LoadScene("Login");
     }
 }

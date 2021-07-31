@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Endless\Leaderboard_Listing.cs" />
     <Compile Include="Assets\Scripts\Endless\Manager.cs" />
     <Compile Include="Assets\Scripts\Endless\Materials.cs" />
+    <Compile Include="Assets\Scripts\Login\Get_Login_Components.cs" />
     <Compile Include="Assets\Scripts\Main_Menu\Brightness.cs" />
     <Compile Include="Assets\Scripts\Main_Menu\Initialise_Canvas_Camera.cs" />
     <Compile Include="Assets\Scripts\Main_Menu\Main_Menu.cs" />

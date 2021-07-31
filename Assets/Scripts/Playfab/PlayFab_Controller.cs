@@ -12,7 +12,7 @@ public class PlayFab_Controller : MonoBehaviour
 
     string User_Email;
     string User_Password;
-    string Username;
+    public string Username;
     string My_ID;
 
     private void OnEnable()
@@ -44,7 +44,12 @@ public class PlayFab_Controller : MonoBehaviour
         {
             User_Email = PlayerPrefs.GetString("EMAIL");
             User_Password = PlayerPrefs.GetString("PASSWORD");
-            var Request = new LoginWithEmailAddressRequest { Email = User_Email, Password = User_Password };
+            var Request = new LoginWithEmailAddressRequest { 
+                Email = User_Email, 
+                Password = User_Password, 
+                InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { 
+                    GetPlayerProfile = true } 
+            };
             PlayFabClientAPI.LoginWithEmailAddress(Request, On_Login_Success, On_Login_Failure);
         }
     }
@@ -64,6 +69,12 @@ public class PlayFab_Controller : MonoBehaviour
         SceneManager.LoadScene("Main_Menu");
 
         My_ID = Result.PlayFabId;
+        if (Result.InfoResultPayload.PlayerProfile != null)
+        {
+            Username = Result.InfoResultPayload.PlayerProfile.DisplayName;
+        }
+
+        Debug.Log(Username);
 
         Get_Player_Data();
     }
@@ -117,10 +128,22 @@ public class PlayFab_Controller : MonoBehaviour
 
     public void On_Click_Login()
     {
-        var Request = new LoginWithEmailAddressRequest { Email = User_Email, Password = User_Password };
+        var Request = new LoginWithEmailAddressRequest { 
+            Email = User_Email, 
+            Password = User_Password,
+            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+            {
+                GetPlayerProfile = true
+            }
+        };
         PlayFabClientAPI.LoginWithEmailAddress(Request, On_Login_Success, On_Login_Failure);
     }
     #endregion Login
+
+    public void Clear_Login_Data()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 
     public int Player_High_Score;
     public int Player_Coins;
