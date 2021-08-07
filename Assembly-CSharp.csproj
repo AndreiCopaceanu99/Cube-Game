@@ -64,7 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Endless\AnchorGameObject.cs" />
     <Compile Include="Assets\Scripts\Endless\Ball_Movement.cs" />
+    <Compile Include="Assets\Scripts\Endless\CameraViewportHandler.cs" />
     <Compile Include="Assets\Scripts\Endless\Camera_Movement.cs" />
     <Compile Include="Assets\Scripts\Endless\Cubes_Movement.cs" />
     <Compile Include="Assets\Scripts\Endless\Leaderboard_Listing.cs" />

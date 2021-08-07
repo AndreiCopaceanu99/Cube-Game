@@ -26,6 +26,8 @@ public class Manager : MonoBehaviour
 
     [SerializeField] Text Points;
 
+    public int Difficulty;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,8 @@ public class Manager : MonoBehaviour
         Second_Chance = false;
 
         camera = Camera.main;
+
+        Difficulty = 0;
 
         // Positions all the platforms at equal distances by taking as reference the one abowe each other
         for (int i = 1; i <= Cubes.Length - 1; i++)
@@ -56,6 +60,11 @@ public class Manager : MonoBehaviour
         if(Ad_Panel.active)
         {
             Ad();
+        }
+
+        if ((int)-Ball_Y / 20 != Difficulty && (int)-Ball_Y / 20 != 0)
+        {
+            Increase_Difficulty();
         }
     }
 
@@ -82,8 +91,9 @@ public class Manager : MonoBehaviour
     {
         Ball_Y = Ball.transform.position.y;
         Camera_Y = camera.transform.position.y;
+
         // If the ball goes off screen, the game is over
-        if(Camera_Y - Ball_Y >= 6f)
+        if(Camera_Y - Ball_Y >= camera.orthographicSize)
         {
             Lose();
             PlayFab_Controller.PFC.Leaderboard_Displayed = true;
@@ -92,6 +102,11 @@ public class Manager : MonoBehaviour
         {
             PlayFab_Controller.PFC.Leaderboard_Displayed = false;
         }
+    }
+
+    void Increase_Difficulty()
+    {
+        Difficulty = (int)-Ball_Y / 20;
     }
 
     // The game is stopped and the game over screen pups up
