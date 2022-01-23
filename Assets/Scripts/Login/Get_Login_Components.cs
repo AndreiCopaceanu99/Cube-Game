@@ -7,12 +7,16 @@ public class Get_Login_Components : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    [SerializeField] Button Register_Button;
     [SerializeField] Button Login_Button;
 
     void Start()
     {
-        Button btn = Login_Button.GetComponent<Button>();
-        btn.onClick.AddListener(PlayFab_Controller.PFC.On_Click_Login);
+        Button Register = Register_Button.GetComponent<Button>();
+        Register.onClick.AddListener(PlayFab_Controller.PFC.On_Click_Register);
+
+        Button Login = Login_Button.GetComponent<Button>();
+        Login.onClick.AddListener(PlayFab_Controller.PFC.On_Click_Login);
     }
 
     public void Get_User_Email(string Email_In)

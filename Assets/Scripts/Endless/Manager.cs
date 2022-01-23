@@ -45,7 +45,7 @@ public class Manager : MonoBehaviour
         // Positions all the platforms at equal distances by taking as reference the one abowe each other
         for (int i = 1; i <= Cubes.Length - 1; i++)
         {
-            Cubes[i].transform.position = new Vector3(0, Cubes[i - 1].transform.position.y - 2f, 0);
+            Cubes[i].transform.position = new Vector3(0, Cubes[i - 1].transform.position.y - 4f, 0);
         }
     }
 
@@ -74,7 +74,7 @@ public class Manager : MonoBehaviour
         Cube_Y = Cubes[0].transform.position.y;
         Camera_Y = camera.transform.position.y;
 
-        if (Cube_Y - Camera_Y >= 6f)
+        if (Cube_Y - Camera_Y >= 10f)
         {
             GameObject Temp_Cube = Cubes[0];
             for (int i = 0; i < Cubes.Length - 1; i++)
@@ -82,7 +82,7 @@ public class Manager : MonoBehaviour
                 Cubes[i] = Cubes[i + 1];
             }
             Cubes[Cubes.Length - 1] = Temp_Cube;
-            Cubes[Cubes.Length - 1].transform.position = new Vector3(Cubes[Cubes.Length - 1].transform.position.x, Cubes[Cubes.Length - 2].transform.position.y - 2f, 0);
+            Cubes[Cubes.Length - 1].transform.position = new Vector3(Cubes[Cubes.Length - 1].transform.position.x, Cubes[Cubes.Length - 2].transform.position.y - 4f, 0);
         }
     }
 

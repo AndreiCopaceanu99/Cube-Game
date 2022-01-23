@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class PlayFab_Controller : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayFab_Controller : MonoBehaviour
     string User_Password;
     public string Username;
     string My_ID;
+    [SerializeField]
+    Text Message;
 
     private void OnEnable()
     {
@@ -50,7 +53,7 @@ public class PlayFab_Controller : MonoBehaviour
                 InfoRequestParameters = new GetPlayerCombinedInfoRequestParams { 
                     GetPlayerProfile = true } 
             };
-            PlayFabClientAPI.LoginWithEmailAddress(Request, On_Login_Success, On_Login_Failure);
+            PlayFabClientAPI.LoginWithEmailAddress(Request, On_Login_Success, On_Error);
         }
     }
 
@@ -66,17 +69,17 @@ public class PlayFab_Controller : MonoBehaviour
         PlayerPrefs.SetString("EMAIL", User_Email);
         PlayerPrefs.SetString("PASSWORD", User_Password);
         GetStats();
+
         SceneManager.LoadScene("Main_Menu");
 
         My_ID = Result.PlayFabId;
-        if (Result.InfoResultPayload.PlayerProfile != null)
-        {
-            Username = Result.InfoResultPayload.PlayerProfile.DisplayName;
-        }
-
-        Debug.Log(Username);
 
         Get_Player_Data();
+
+        //Debug.Log(Username);
+        Debug.Log(Result.InfoResultPayload.PlayerProfile.DisplayName);
+
+        Username = Result.InfoResultPayload.PlayerProfile.DisplayName;
     }
 
     private void On_Register_Success(RegisterPlayFabUserResult Result)
@@ -86,7 +89,7 @@ public class PlayFab_Controller : MonoBehaviour
         PlayerPrefs.SetString("PASSWORD", User_Password);
 
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
-        { DisplayName = Username }, On_Display_Name, On_Login_Failure);
+        { DisplayName = Username }, On_Display_Name, On_Error);
         GetStats();
         SceneManager.LoadScene("Main_Menu");
 
@@ -98,17 +101,6 @@ public class PlayFab_Controller : MonoBehaviour
     void On_Display_Name(UpdateUserTitleDisplayNameResult Result)
     {
         Debug.Log(Result.DisplayName + " is your new display name");
-    }
-
-    private void On_Login_Failure(PlayFabError error)
-    {
-        var Register_Request = new RegisterPlayFabUserRequest { Email = User_Email, Password = User_Password, Username = Username };
-        PlayFabClientAPI.RegisterPlayFabUser(Register_Request, On_Register_Success, On_Register_Failure);
-    }
-
-    private void On_Register_Failure(PlayFabError Error)
-    {
-        Debug.LogError(Error.GenerateErrorReport());
     }
 
     public void Get_User_Email(string Email_In)
@@ -126,24 +118,53 @@ public class PlayFab_Controller : MonoBehaviour
         Username = Username_In;
     }
 
+    public void On_Click_Register()
+    {
+        if(User_Password.Length < 6)
+        {
+            Message.text = "Password needs to have at least 6 characters";
+            return;
+        }
+
+        if(Username.Length == 0)
+        {
+            Message.text = "Username field is empty";
+            return;
+        }
+
+        var Register_Request = new RegisterPlayFabUserRequest 
+        { Email = User_Email, 
+            Password = User_Password, 
+            Username = Username 
+        };
+        PlayFabClientAPI.RegisterPlayFabUser(Register_Request, On_Register_Success, On_Error);
+    }
+
     public void On_Click_Login()
     {
-        var Request = new LoginWithEmailAddressRequest { 
-            Email = User_Email, 
+        var request = new LoginWithEmailAddressRequest
+        {
+            Email = User_Email,
             Password = User_Password,
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
             {
                 GetPlayerProfile = true
             }
         };
-        PlayFabClientAPI.LoginWithEmailAddress(Request, On_Login_Success, On_Login_Failure);
+        PlayFabClientAPI.LoginWithEmailAddress(request, On_Login_Success, On_Error);
     }
-    #endregion Login
+
+    void On_Error(PlayFabError error)
+    {
+        Message.text = error.ErrorMessage;
+        Debug.Log(error.GenerateErrorReport());
+    }
 
     public void Clear_Login_Data()
     {
         PlayerPrefs.DeleteAll();
     }
+    #endregion Login
 
     public int Player_High_Score;
     public int Player_Coins;

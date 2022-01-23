@@ -10,6 +10,13 @@ public class Main_Menu : MonoBehaviour
     [SerializeField] GameObject[] Menu_Objects;
     [SerializeField] Text Username;
 
+    [SerializeField] Image Background;
+    [SerializeField] Image Username_Background;
+    [SerializeField] Image[] Button;
+    [SerializeField] Image[] Square_Button;
+
+    [SerializeField] UI.UI_Elements[] ui;
+
     private void Start()
     {
         Menu_Objects[0].SetActive(true);
@@ -27,6 +34,20 @@ public class Main_Menu : MonoBehaviour
         if (Username.text == "")
         {
             Username.text = PlayFab_Controller.PFC.Username;
+        }
+
+        if(Background.sprite != ui[Persistent_Data.PD.My_Background].Background)
+        {
+            Background.sprite = ui[Persistent_Data.PD.My_Background].Background;
+            Username_Background.sprite = ui[Persistent_Data.PD.My_Background].Username;
+            foreach(Image button in Button)
+            {
+                button.sprite = ui[Persistent_Data.PD.My_Background].Long_Button;
+            }
+            foreach (Image button in Square_Button)
+            {
+                button.sprite = ui[Persistent_Data.PD.My_Background].Square_Button;
+            }
         }
     }
 

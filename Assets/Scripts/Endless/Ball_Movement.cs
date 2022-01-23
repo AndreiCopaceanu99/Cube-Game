@@ -25,7 +25,7 @@ public class Ball_Movement : MonoBehaviour
     void FixedUpdate()
     {
         // Takes the inputs from the player and applies the movement to the ball
-        Horizontal_Movement = Input.GetAxis("Horizontal") * Speed * Time.fixedDeltaTime;
+        Horizontal_Movement = Input.acceleration.x * Speed * Time.fixedDeltaTime;
         // It limits the amount of speed the ball can have
         if ((rb.velocity.magnitude <= 7f && On_Cube) || (!On_Cube && rb.velocity.magnitude <= 17f))
         {
